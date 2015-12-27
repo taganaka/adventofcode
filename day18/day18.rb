@@ -36,17 +36,9 @@ end
     row.each_with_index do |c, x|
       on, _off = fetch(matrix, x, y)
       if c == true
-        if on == 3 || on == 2
-          next_matrix[y][x] = true
-        else
-          next_matrix[y][x] = false
-        end
+        next_matrix[y][x] = on == 3 || on == 2
       else
-        if on == 3
-          next_matrix[y][x] = true
-        else
-          next_matrix[y][x] = false
-        end
+        next_matrix[y][x] = on == 3
       end
     end
   end
