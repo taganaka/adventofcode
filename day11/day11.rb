@@ -2,6 +2,17 @@
 
 INPUT = 'hepxcrrq'
 
+def next_password(str)
+  ret = nil
+  loop do
+    str = str.next
+    next if str =~ /i|o|l/
+    next if str.scan(/(.)\1/).count < 2
+    return str if ordered?(str)
+  end
+  ret
+end
+
 def ordered?(instr)
   ret = false
   0.upto(instr.size - 3) do |i|
@@ -15,13 +26,9 @@ def ordered?(instr)
   end
   ret
 end
-str = INPUT
-loop do
-  str = str.next
-  next if str =~ /i|o|l/
-  next if str.scan(/(.)\1/).count < 2
-  if ordered?(str)
-    puts str
-    break
-  end
-end
+
+sol1 = next_password(INPUT)
+sol2 = next_password(sol1)
+
+puts sol1
+puts sol2

@@ -26,7 +26,14 @@ def solve(input)
   ret
 end
 
-40.times do |_i|
-  current = solve(current)
+def solve_fast(input)
+  input.gsub(/(.)\1*/) do
+    "#{$&.size}#{$1}"
+  end
+end
+
+50.times do |i|
+  current = solve_fast(current)
+  puts current.size if i == 40
 end
 puts current.size
