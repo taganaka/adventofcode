@@ -5,6 +5,8 @@ int main(int argc, char const *argv[]) {
   FILE *fp = fopen(argv[1], "r");
   char c;
   int total = 0;
+  int magik = -1;
+  int count = 1;
   while (fscanf(fp, "%c", &c) != EOF) {
     switch (c) {
       case '(':
@@ -16,8 +18,12 @@ int main(int argc, char const *argv[]) {
       default:
         fprintf(stderr, "Unk char [%c] ... Ignoring\n", c);
     }
+    if (total == -1 && magik < 0) {
+      magik = count;
+    }
+    count++;
   }
   fclose(fp);
-  printf("%d\n", total);
+  printf("%d %d\n", total, magik);
   return 0;
 }
