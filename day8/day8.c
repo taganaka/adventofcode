@@ -7,12 +7,13 @@ int solve(const char *buff){
   int mem_size = len - 2;
   for (int i = 1; i < len - 1; i++){
     if (buff[i] == '\\') {
-      if (buff[i + 1] == 'x')
+      if (buff[i + 1] == 'x') {
         mem_size -= 3;
-      else if (buff[i + 1] == '\\')
+        i += 3;
+      } else {
         mem_size--;
-      else if (buff[i + 1] == '"')
-        mem_size--;
+        i++;
+      }
     }
   }
   return mem_size;
@@ -26,9 +27,7 @@ int main(int argc, char const *argv[]) {
     buff[strlen(buff) - 1] = '\0';
     if (strlen(buff) == 0)
       break;
-    // printf("%s [%ld %d]\n", buff, strlen(buff), solve(buff));
-    total += strlen(buff);
-    total -= solve(buff);
+    total += strlen(buff) - solve(buff);
   }
   fclose(fp);
   printf("%d\n", total);
